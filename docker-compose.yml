@@ -1,0 +1,13 @@
+version: "3"
+services:
+  mirror:
+    image: ghcr.io/droso-hass/mirror-mqtt
+    devices:
+      - /dev/hidraw0
+    privileged: true
+    environment:
+      MIRROR_ID: mirror1
+      MIRROR_USB_HUB: "1-1"
+      MIRROR_USB_PORT: "2"
+      MIRROR_MQTT_HOST: "10.10.2.1"
+      MIRROR_MQTT_PORT: 1883
