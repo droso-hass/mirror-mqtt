@@ -6,11 +6,11 @@ import os
 from threading import Thread
 import paho.mqtt.client as mqtt
 
-ID = os.env.get("MIRROR_ID") or "mirror1"
-USB_HUB = os.env.get("MIRROR_USB_HUB") or "1-1"
-USB_PORT = os.env.get("MIRROR_USB_PORT") or "2"
-MQTT_HOST = os.env.get("MIRROR_MQTT_HOST") or "127.0.0.1"
-MQTT_PORT = os.env.get("MIRROR_MQTT_PORT") or 1883
+ID = os.environ.get("MIRROR_ID") or "mirror1"
+USB_HUB = os.environ.get("MIRROR_USB_HUB") or "1-1"
+USB_PORT = os.environ.get("MIRROR_USB_PORT") or "2"
+MQTT_HOST = os.environ.get("MIRROR_MQTT_HOST") or "127.0.0.1"
+MQTT_PORT = os.environ.get("MIRROR_MQTT_PORT") or 1883
 
 BASE_TOPIC = f"mirror/{ID}"
 
@@ -45,9 +45,9 @@ mirror_thread = None
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
-    client.publish(f"homeassistant/tag/{ID}/config", json.dumps({"topic": BASE_TOPIC+"/tag/scan"}))
-    client.publish(f"homeassistant/switch/{ID}/config", json.dumps({"name": ID, "command_topic": BASE_TOPIC+"/usb/set", "state_topic": BASE_TOPIC+"/usb/state"}))
-    client.publish(f"homeassistant/binary_sensor/{ID}/config", json.dumps({"name": ID, "device_class": "power", "state_topic": BASE_TOPIC+"/mirror"}))
+    client.publish(f"homeassistant/tag/{ID}/config", json.dumps({"topic": BASE_TOPIC+"/tag/scan"}), retain=True)
+    client.publish(f"homeassistant/switch/{ID}/config", json.dumps({"name": ID, "command_topic": BASE_TOPIC+"/usb/set", "state_topic": BASE_TOPIC+"/usb/state"}), retain=True)
+    client.publish(f"homeassistant/binary_sensor/{ID}/config", json.dumps({"name": ID, "device_class": "power", "state_topic": BASE_TOPIC+"/mirror"}), retain=True)
     client.subscribe(BASE_TOPIC+"/usb/set")
 
     os.system(f"uhubctl -a on -p {USB_PORT} -l {USB_HUB}")

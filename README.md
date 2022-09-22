@@ -1,6 +1,6 @@
 # MQTT mir:ror service
 
-This service allows to connect your Violet mir:ror to Home-Assistant.
+This service allows to connect your Violet [mir:ror](https://fr.wikipedia.org/wiki/Mir:ror) to Home-Assistant.
 
 It provides a MQTT tag scanner, a binary sensor indicating the position of the mir:ror and a switch to connect/disconnect the mir:ror (using uhubctl).
 
@@ -13,6 +13,7 @@ MQTT discovery is fully supported, so you just need to start the service for the
 - Run `docker-compose up -d`
 
 ### Using docker
+- The image is available [here](https://github.com/droso-hass/mirror-mqtt/pkgs/container/mirror-mqtt)
 - Run `docker run -d --device /dev/hidraw0 -e MIRROR_MQTT_HOST="192.168.1.x" --privileged ghcr.io/droso-hass/mirror-mqtt`
 
 ### Directly
