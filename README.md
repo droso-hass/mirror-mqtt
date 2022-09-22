@@ -31,6 +31,7 @@ MQTT discovery is fully supported, so you just need to start the service for the
 |MIRROR_USB_PORT|USB_PORT|2|the port on the usb hub to control|
 |MIRROR_MQTT_HOST|MQTT_HOST|127.0.0.1|Address of your MQTT server|
 |MIRROR_MQTT_PORT|MQTT_PORT|1883|Port of your MQTT server|
+|MIRROR_DEV|DEV|/dev/hidraw0|hid device corresponding to your mir:ror|
 
 ## MQTT Topics
 
