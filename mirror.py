@@ -11,6 +11,7 @@ USB_HUB = os.environ.get("MIRROR_USB_HUB") or "1-1"
 USB_PORT = os.environ.get("MIRROR_USB_PORT") or "2"
 MQTT_HOST = os.environ.get("MIRROR_MQTT_HOST") or "127.0.0.1"
 MQTT_PORT = os.environ.get("MIRROR_MQTT_PORT") or 1883
+DEV = os.environ.get("MIRROR_DEV") or "/dev/hidraw0"
 
 BASE_TOPIC = f"mirror/{ID}"
 
@@ -22,7 +23,7 @@ class Mirror(Thread):
         self._running = True
 
     def run(self):
-        self._mirror = open("/dev/hidraw0", "rb")
+        self._mirror = open(DEV, "rb")
         while self._running:
             try:
                 data = self._mirror.read(16)
